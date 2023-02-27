@@ -44,6 +44,17 @@ Wikipedia data, not getting it.
 
 Note: this library was designed for ease of use and simplicity, not for advanced use. If you plan on doing serious scraping or automated requests, please use `Pywikipediabot <http://www.mediawiki.org/wiki/Manual:Pywikipediabot>`__ (or one of the other more advanced `Python MediaWiki API wrappers <http://en.wikipedia.org/wiki/Wikipedia:Creating_a_bot#Python>`__), which has a larger API, rate limiting, and other features so we can be considerate of the MediaWiki infrastructure.
 
+
+NOTE
+------------
+repo was not working changes = 
+USER_AGENT = '   random user agent 
+API_URL = 'https://'   <- was http first -and no redirects where done>
+ANY OCCURANCE OF limit DELETED, EXAMPLE -> 
+      query_params = {
+        'limit': 1
+      }
+
 Installation
 ------------
 

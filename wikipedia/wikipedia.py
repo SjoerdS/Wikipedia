@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import requests
 import time
-from bs4 import BeautifulSoup
+from bs4 import *
 from datetime import datetime, timedelta
 from decimal import Decimal
 
@@ -12,12 +12,12 @@ from .exceptions import (
 from .util import cache, stdout_encode, debug
 import re
 
-API_URL = 'http://en.wikipedia.org/w/api.php'
+API_URL = 'https://en.wikipedia.org/w/api.php'
 RATE_LIMIT = False
 RATE_LIMIT_MIN_WAIT = None
 RATE_LIMIT_LAST_CALL = None
-USER_AGENT = 'wikipedia (https://github.com/goldsmith/Wikipedia/)'
-
+#USER_AGENT = 'wikipedia (https://github.com/goldsmith/Wikipedia/)'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
 
 def set_lang(prefix):
   '''
@@ -29,7 +29,7 @@ def set_lang(prefix):
   .. note:: Make sure you search for page titles in the language that you have set.
   '''
   global API_URL
-  API_URL = 'http://' + prefix.lower() + '.wikipedia.org/w/api.php'
+  API_URL = 'https://' + prefix.lower() + '.wikipedia.org/w/api.php'
 
   for cached_func in (search, suggest, summary):
     cached_func.clear_cache()
@@ -94,7 +94,6 @@ def search(query, results=10, suggestion=False):
     'list': 'search',
     'srprop': '',
     'srlimit': results,
-    'limit': results,
     'srsearch': query
   }
   if suggestion:
@@ -736,7 +735,7 @@ def _wiki_request(params):
     time.sleep(int(wait_time.total_seconds()))
 
   r = requests.get(API_URL, params=params, headers=headers)
-
+  print(str(API_URL)+str(params)+str(headers))
   if RATE_LIMIT:
     RATE_LIMIT_LAST_CALL = datetime.now()
 
